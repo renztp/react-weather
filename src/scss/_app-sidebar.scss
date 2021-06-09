@@ -1,0 +1,77 @@
+.sidebar-container {
+  background: $sidebarBg;
+  min-height: 100vh;
+}
+
+.AppSidebar {
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    // background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+
+  * {
+    position: relative;
+    z-index: 5;
+  }
+
+  &__nav-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2em 0;
+
+    .nav-btn {
+      border: 1px solid #ddd;
+      box-shadow: 0px 2px 3px #ddd;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background: rgb(64, 64, 72);
+        color: #fff;
+      }
+    }
+
+    .search-btn {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      padding: 8px 12px;
+      font-size: 18px;
+      letter-spacing: 1.15;
+      font-weight: 500;
+      border: unset;
+      color: #000;
+      background: unset;
+      cursor: pointer;
+
+      .btn-left {
+        position: relative;
+        left: -15px;
+        transition: all 0.2s ease-in-out;
+      }
+
+      &:hover .btn-left {
+        left: -20px;
+      }
+    }
+
+    .loc-btn {
+      padding: 6px 8px;
+    }
+  }
+}
