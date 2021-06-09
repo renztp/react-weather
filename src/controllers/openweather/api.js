@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api_base = "http://api.openweathermap.org/data/2.5/";
-const api_key = "Get APi openweather";
+const api_key = "548a89a45975b131c4853b6dc60d96ac";
 
 export function getByCityName(loc) {
   return axios

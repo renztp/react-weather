@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AppContainer from "./components/AppContainer";
 import AppSidebar from "./components/AppSidebar";
 import AppSearch from "./components/AppSearch";
