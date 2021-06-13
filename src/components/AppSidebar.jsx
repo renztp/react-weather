@@ -28,8 +28,8 @@ export default function AppSidebar() {
         <SidebarNavCont />
         <div className="AppSidebar__weather-state">
           <h1>{main}</h1>
-          <p>{description}</p>
           <span>{toCelcius(temp)}°C</span>
+          <p>{description}</p>
         </div>
 
         <div className="AppSidebar__weather-visual"></div>
