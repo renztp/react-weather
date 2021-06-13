@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import WeatherDays from "../components/WeatherDays";
+import WeatherTracker from "../components/WeatherTracker";
 
 export default function AppContainer() {
   useEffect(() => {
@@ -9,7 +10,11 @@ export default function AppContainer() {
   return (
     <div className="app-container">
       <div className="app-container__container">
+        <h1 style={{ marginBottom: "15px" }}>5 day forecast</h1>
         <WeatherDays />
+        <div className="app-container__sub-components">
+          <WeatherTracker />
+        </div>
       </div>
     </div>
   );

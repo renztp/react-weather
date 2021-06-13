@@ -15,15 +15,10 @@ export default function AppSidebar() {
         // Log data for testing
 
         console.log(res);
-        if (theType === "weather") {
-          setCurrWeather(res);
-        } else {
-          console.log("forecast");
-        }
+        setCurrWeather(res);
       });
     }
     setApiData("weather");
-    setApiData("forecast");
   }, []);
 
   if (currWeather) {
