@@ -1,10 +1,21 @@
 import axios from "axios";
 
-const api_base = "http://api.openweathermap.org/data/2.5/";
-const api_key = "548a89a45975b131c4853b6dc60d96ac";
+const api_key = process.env.REACT_APP_OPENWEATHER_KEY;
 
-export function getByCityName(loc) {
-  return axios
-    .get(`${api_base}weather?q=${loc}&appid=${api_key}`)
-    .then((res) => res.data);
+export function getByCityName(loc, type) {
+  if (type === "weather") {
+    return axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/weather?q=${loc}&appid=${api_key}`
+      )
+      .then((res) => res.data);
+  }
+
+  if (type === "forecast") {
+    return axios
+      .get(
+        `http://api.openweathermap.org/data/2.5/forecast?q=${loc}&appid=${api_key}`
+      )
+      .then((res) => res.data);
+  }
 }

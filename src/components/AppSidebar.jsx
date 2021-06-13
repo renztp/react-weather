@@ -10,14 +10,20 @@ export default function AppSidebar() {
   };
 
   useEffect(() => {
-    function setApiData() {
-      return getByCityName("Philippines").then((res) => {
+    function setApiData(theType) {
+      return getByCityName("Philippines", theType).then((res) => {
         // Log data for testing
+
         console.log(res);
-        setCurrWeather(res);
+        if (theType === "weather") {
+          setCurrWeather(res);
+        } else {
+          console.log("forecast");
+        }
       });
     }
-    setApiData();
+    setApiData("weather");
+    setApiData("forecast");
   }, []);
 
   if (currWeather) {
