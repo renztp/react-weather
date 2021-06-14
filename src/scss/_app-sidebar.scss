@@ -79,3 +79,40 @@
     text-align: center;
   }
 }
+
+.app-search {
+  &__form {
+    display: block;
+    width: 100%;
+    position: relative;
+    padding: 8px 0;
+  }
+
+  &__placeholder {
+    position: absolute;
+    display: flex;
+    align-items: center;
+
+    svg {
+      width: 22px;
+      height: auto;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    span {
+      color: #888;
+    }
+  }
+
+  &__form input {
+    width: 100%;
+    display: block;
+    border: 0;
+    background: transparent;
+    font-size: 16px;
+    outline: 0;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+  }
+}

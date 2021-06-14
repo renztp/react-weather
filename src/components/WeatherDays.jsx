@@ -56,8 +56,8 @@ export default function WeatherDays(state) {
 
   return (
     <div className="weather-days">
-      {weatherdays.map((item) => (
-        <div className="weather-days__item">
+      {weatherdays.map((item, index) => (
+        <div className="weather-days__item" key="index">
           <h2>{item.date}</h2>
           <WeatherState state={item.state} />
           {item.state === "Rainy" ? "Rainy" : "Sunny"}
