@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
 import PlacesAutocomplete, {
   geocodeByAddress,
+  geocodeByPlaceId,
   getLatLng,
 } from "react-places-autocomplete";
 
@@ -13,8 +15,27 @@ export default function AppSearch() {
   // };
 
   const [address, setAddress] = useState("");
+  const [locInputState, setlocInputState] = useState(false);
+  const [coordinates, setCoordinates] = useState({
+    lat: null,
+    lng: null,
+  });
 
-  const handleSelect = async (value) => {};
+  const handleSelect = async (value) => {
+    const result = await geocodeByAddress(value);
+    const latlng = await getLatLng(result[0]);
+    setAddress(value);
+    setCoordinates(latlng);
+    console.log(latlng);
+  };
+
+  const clearInput = () => {
+    setAddress("");
+  };
+
+  const handleInputFocus = () => {
+    setlocInputState(!locInputState);
+  };
 
   return (
     <div className="app-search">
@@ -31,40 +52,59 @@ export default function AppSearch() {
               getSuggestionItemProps,
               loading,
             }) => (
-              <div>
-                <input
-                  {...getInputProps({
-                    placeholder: "Search for a location...",
-                  })}
-                />
-                <div>{loading ? <div>Loading...</div> : null}</div>
-                {suggestions.map((suggestion, index) => {
-                  const style = {
-                    backgroundColor: suggestion.active ? "#333" : "#f2f4f6",
-                    color: suggestion.active ? "#fff" : "#333",
-                  };
+              <div className="form-container">
+                <div
+                  className={
+                    locInputState
+                      ? "loc-input-wrapper is--focused"
+                      : "loc-input-wrapper"
+                  }
+                  onFocus={handleInputFocus}
+                  onBlur={handleInputFocus}
+                >
+                  <input
+                    {...getInputProps({
+                      placeholder: "Search for a location...",
+                    })}
+                  />
+                  <IoClose
+                    className={address.length > 0 ? "is--visible" : null}
+                    onClick={clearInput}
+                  />
+                </div>
+                {/* <div>{loading ? <div>Loading...</div> : null}</div> */}
+                <ul
+                  className={
+                    address.length > 0
+                      ? "loc-results is--visible"
+                      : "loc-results"
+                  }
+                >
+                  {suggestions.map((suggestion, index) => {
+                    const { mainText, secondaryText } =
+                      suggestion.formattedSuggestion;
+                    const style = {
+                      backgroundColor: suggestion.active ? "#fff" : "#f8f6f6",
+                      color: suggestion.active ? "#111" : "#555",
+                      cursor: "pointer",
+                    };
 
-                  return (
-                    <div
-                      key={index}
-                      {...getSuggestionItemProps(suggestion, { style })}
-                    >
-                      {suggestion.description}
-                    </div>
-                  );
-                })}
+                    return (
+                      <li
+                        key={index}
+                        {...getSuggestionItemProps(suggestion, { style })}
+                      >
+                        <p className="loc-title">{mainText}</p>
+                        {secondaryText ? (
+                          <p className="loc-secondary">{secondaryText}</p>
+                        ) : null}
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
             )}
           </PlacesAutocomplete>
-
-          {/* {searchInput.length > 0 ? (
-            ""
-          ) : (
-            <p className="app-search__placeholder">
-              <FiSearch color="#888" /> <span>Search...</span>
-            </p>
-          )}
-          <input type="text" onChange={(e) => captureSearch(e.target.value)} /> */}
         </div>
       </div>
     </div>

@@ -109,10 +109,85 @@
     width: 100%;
     display: block;
     border: 0;
-    background: transparent;
     font-size: 16px;
     outline: 0;
-    border-bottom: 1px solid #333;
-    padding-bottom: 8px;
+    padding: 10px 8px;
+    border-bottom: 0;
+  }
+
+  &__form .form-container {
+    position: relative;
+  }
+
+  &__form .loc-input-wrapper {
+    border-radius: 7px;
+    border: 2px solid #ddd;
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+
+    &.is--focused {
+      border: 2px solid rgb(199, 199, 147);
+    }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 4px;
+      height: auto;
+      width: 27px;
+      color: #555;
+      transition: all 0.2s ease-in-out;
+      opacity: 0;
+      cursor: pointer;
+
+      &.is--visible {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__form .loc-results {
+    position: absolute;
+    width: 100%;
+    top: 44px;
+    z-index: 5;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background: #fff;
+    border-radius: 7px;
+    border: 0px solid #ddd;
+    margin-top: 2px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+
+    &.is--visible {
+      border: 2px solid #ddd;
+      opacity: 1;
+    }
+
+    li {
+      padding: 8px 5px;
+      border-bottom: 1px solid #ddd;
+      padding: 11px;
+      background: #574f4f;
+
+      &:last-child {
+        border-bottom: 0;
+      }
+
+      .loc-title {
+        color: #444;
+        font-size: 16px;
+      }
+
+      .loc-secondary {
+        color: #888;
+        font-size: 12px;
+      }
+    }
   }
 }

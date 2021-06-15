@@ -14,7 +14,7 @@ export default function AppSidebar() {
       return getByCityName("Philippines", theType).then((res) => {
         // Log data for testing
 
-        console.log(res);
+        // console.log(res);
         setCurrWeather(res);
       });
     }
