@@ -6,8 +6,10 @@ import PlacesAutocomplete, {
   geocodeByPlaceId,
   getLatLng,
 } from "react-places-autocomplete";
+import { useHistory } from "react-router-dom";
 
-export default function AppSearch() {
+export default function AppSearch(props) {
+  const history = useHistory();
   // const [searchInput, setSearchInput] = useState("");
 
   // const captureSearch = (e) => {
@@ -24,9 +26,10 @@ export default function AppSearch() {
   const handleSelect = async (value) => {
     const result = await geocodeByAddress(value);
     const latlng = await getLatLng(result[0]);
-    setAddress(value);
-    setCoordinates(latlng);
-    console.log(latlng);
+    await setAddress(value);
+    await setCoordinates(latlng);
+    await props.passfunction(latlng);
+    history.push("/");
   };
 
   const clearInput = () => {

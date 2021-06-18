@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SidebarNavCont from "./SidebarNavCont";
-import { getByCityName } from "../controllers/openweather/api";
+import { getByLatLng } from "../controllers/openweather/api";
 
-export default function AppSidebar() {
+export default function AppSidebar({ passlatlng } = this.props) {
   const [currWeather, setCurrWeather] = useState("");
 
   const toCelcius = (temp) => {
@@ -10,15 +10,15 @@ export default function AppSidebar() {
   };
 
   useEffect(() => {
-    function setApiData(theType) {
-      return getByCityName("Philippines", theType).then((res) => {
+    function setApiData(lat, lng, theType) {
+      return getByLatLng(lat, lng, theType).then((res) => {
         // Log data for testing
 
         // console.log(res);
         setCurrWeather(res);
       });
     }
-    setApiData("weather");
+    setApiData(passlatlng.lat, passlatlng.lng, "weather");
   }, []);
 
   if (currWeather) {
