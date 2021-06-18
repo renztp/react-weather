@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { WiCloudy, WiDaySunny, WiDayShowers, WiRainMix } from "react-icons/wi";
+import { getByLatLng } from "../controllers/openweather/api";
 
 function WeatherState({ state } = this.props) {
   if (state === "Cloudy") return <WiCloudy />;
@@ -8,14 +9,7 @@ function WeatherState({ state } = this.props) {
   if (state === "Shower") return <WiDayShowers />;
 }
 
-export default function WeatherDays(state) {
-  const validateWeatherState = () => {
-    if (state === "Cloudy") return <WiCloudy />;
-    if (state === "Rainy") return <WiRainMix />;
-    if (state === "Sunny") return <WiDaySunny />;
-    if (state === "Shower") return <WiDayShowers />;
-  };
-
+export default function WeatherDays({ latlngdata } = this.props) {
   const [weatherdays, setWeatherdays] = useState([
     {
       id: 1,
@@ -53,6 +47,18 @@ export default function WeatherDays(state) {
       max_degree: "11C",
     },
   ]);
+
+  const [weatherForecast, setWeatherForecast] = useState(null);
+  useEffect(() => {
+    function setApiData(lat, lng, theType) {
+      return getByLatLng(lat, lng, theType).then((res) => {
+        setWeatherForecast(res);
+      });
+    }
+
+    setApiData(latlngdata.lat, latlngdata.lng, "forecast");
+    console.log(weatherForecast);
+  }, [latlngdata]);
 
   return (
     <div className="weather-days">

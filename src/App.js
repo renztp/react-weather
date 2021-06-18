@@ -10,7 +10,6 @@ function App() {
 
   const handleSetLatlng = (theData) => {
     setLatlng(theData);
-    console.log(latlng ? latlng : null);
   };
 
   useEffect(() => {
