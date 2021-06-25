@@ -52,6 +52,7 @@ export default function WeatherDays({ latlngdata } = this.props) {
   useEffect(() => {
     function setApiData(lat, lng, theType) {
       return getByLatLng(lat, lng, theType).then((res) => {
+        console.log(res)
         setWeatherForecast(res);
       });
     }
