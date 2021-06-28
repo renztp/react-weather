@@ -28,20 +28,23 @@
   &__nav-controls {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 80%;
     margin: 0 auto;
     padding: 2em 0;
 
     .nav-btn {
-      border: 1px solid #ddd;
-      box-shadow: 0px 2px 3px #ddd;
+      border: 1px solid transparent;
+      // box-shadow: 0px 2px 3px #ddd;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 8px;
-      background: #fff;
+      background: rgba(0, 0, 0, 0.8);
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+      color: #fff;
 
       &:hover {
-        background: rgb(64, 64, 72);
+        background: rgba(0, 0, 0, 1);
         color: #fff;
       }
     }
@@ -55,7 +58,7 @@
       letter-spacing: 1.15;
       font-weight: 500;
       border: unset;
-      color: #000;
+      color: #fff;
       background: unset;
       cursor: pointer;
 
@@ -86,6 +89,7 @@
     width: 100%;
     position: relative;
     padding: 8px 0;
+    margin-right: 15px;
   }
 
   &__placeholder {
@@ -111,8 +115,9 @@
     border: 0;
     font-size: 16px;
     outline: 0;
-    padding: 10px 8px;
+    padding: 7.7px 8px;
     border-bottom: 0;
+    font-size: 18px;
   }
 
   &__form .form-container {
@@ -121,16 +126,24 @@
 
   &__form .loc-input-wrapper {
     border-radius: 7px;
-    border: 2px solid #ddd;
-    background: #fff;
+    border: 2px solid transparent;
+    background: rgba(0, 0, 0, 0.8);
     overflow: hidden;
     position: relative;
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+
+    &.search {
+      border: 2px solid #ddd;
+      box-shadow: unset;
+    }
 
     &.is--focused {
       border: 2px solid rgb(199, 199, 147);
     }
 
-    svg {
+    &.search svg {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);

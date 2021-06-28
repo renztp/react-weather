@@ -8,11 +8,20 @@ export default function SidebarNavCont() {
 
   return (
     <div className="AppSidebar__nav-controls">
-      <button onClick={() => history.push("/search")} className="search-btn">
-        <BsChevronLeft className="btn-left" />
-        <BsSearch style={{ marginRight: "8px" }} />
-        Search Location
-      </button>
+      <div className="app-search__form">
+        <div className="form-container">
+          <div className="loc-input-wrapper">
+            <button
+              onClick={() => history.push("/search")}
+              className="search-btn"
+            >
+              {/* <BsChevronLeft className="btn-left" /> */}
+              <BsSearch style={{ marginRight: "8px" }} />
+              Search Location
+            </button>
+          </div>
+        </div>
+      </div>
       <button className="loc-btn nav-btn">
         <BiCurrentLocation size="1.5em" />
       </button>

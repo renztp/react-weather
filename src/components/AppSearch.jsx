@@ -59,15 +59,15 @@ export default function AppSearch(props) {
                 <div
                   className={
                     locInputState
-                      ? "loc-input-wrapper is--focused"
-                      : "loc-input-wrapper"
+                      ? "loc-input-wrapper search is--focused"
+                      : "loc-input-wrapper search"
                   }
                   onFocus={handleInputFocus}
                   onBlur={handleInputFocus}
                 >
                   <input
                     {...getInputProps({
-                      placeholder: "Search for a location...",
+                      placeholder: "I.e Philippines",
                     })}
                   />
                   <IoClose
