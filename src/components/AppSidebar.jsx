@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SidebarNavCont from "./SidebarNavCont";
+import SidebarNavState from "./SidebarNavState";
 import { getByLatLng } from "../controllers/openweather/api";
 
 export default function AppSidebar({ passlatlng } = this.props) {
@@ -14,7 +15,7 @@ export default function AppSidebar({ passlatlng } = this.props) {
       return getByLatLng(lat, lng, theType).then((res) => {
         // Log data for testing
 
-        // console.log(res);
+        console.log(res);
         setCurrWeather(res);
       });
     }
@@ -22,18 +23,17 @@ export default function AppSidebar({ passlatlng } = this.props) {
   }, []);
 
   if (currWeather) {
-    const { main, description } = currWeather.weather[0];
+    const { main, description, icon } = currWeather.weather[0];
     const { temp } = currWeather.main;
     return (
       <div className="AppSidebar">
         <SidebarNavCont />
-        <div className="AppSidebar__weather-state">
-          <h1>{main}</h1>
-          <span>{toCelcius(temp)}°C</span>
-          <p>{description}</p>
-        </div>
-
-        <div className="AppSidebar__weather-visual"></div>
+        <SidebarNavState
+          main={main}
+          description={description}
+          temp={temp}
+          icon={icon}
+        />
       </div>
     );
   }
