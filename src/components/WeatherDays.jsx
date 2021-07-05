@@ -1,13 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { WiCloudy, WiDaySunny, WiDayShowers, WiRainMix } from "react-icons/wi";
+import {
+  WiCloudy,
+  WiDaySunny,
+  WiDayShowers,
+  WiShowers,
+  WiNightClear,
+  WiThunderstorm,
+  WiSnowflakeCold,
+  WiDust,
+  WiDayCloudy,
+  WiCloud,
+  WiNightAltPartlyCloudy,
+} from "react-icons/wi";
 import { getByLatLng } from "../controllers/openweather/api";
 import { toCelcius } from "../utils/helpers/converters";
 
 function WeatherState({ state } = this.props) {
-  if (state === "Clouds") return <WiCloudy />;
-  if (state === "Rain") return <WiRainMix />;
-  if (state === "Sunny") return <WiDaySunny />;
-  if (state === "Shower") return <WiDayShowers />;
+  if (state === "01d") return <WiDaySunny />;
+  if (state === "01n") return <WiNightClear />;
+  if (state === "11d") return <WiThunderstorm />;
+  if (state === "09d") return <WiShowers />;
+  if (state === "10d") return <WiDayShowers />;
+  if (state === "13d") return <WiSnowflakeCold />;
+  if (state === "50d") return <WiDust />;
+  if (state === "02d") return <WiDayCloudy />;
+  if (state === "02n") return <WiNightAltPartlyCloudy />;
+  if (state === "03d") return <WiCloudy />;
+  if (state === "03n") return <WiNightAltPartlyCloudy />;
+  if (state === "04d") return <WiCloud />;
+  if (state === "04n") return <WiNightAltPartlyCloudy />;
 }
 
 export default function WeatherDays({ latlngdata } = this.props) {
@@ -42,8 +63,8 @@ export default function WeatherDays({ latlngdata } = this.props) {
               // TODO: Need to convert to proper format
               // i.e Day text, Month Day-number (Sun, June 7)
             }
-            <WeatherState state={item.weather[0].main} />
-            {/* {item.weather[0].main} */}
+            <WeatherState state={item.weather[0].icon} />
+            {/* {item.weather[0].icon} */}
             {/* {item.state === "Rainy" ? "Rainy" : "Sunny"} */}
             <ul>
               <li>{toCelcius(item.main.temp)}°C</li>
