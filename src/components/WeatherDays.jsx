@@ -1,53 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { WiCloudy, WiDaySunny, WiDayShowers, WiRainMix } from "react-icons/wi";
 import { getByLatLng } from "../controllers/openweather/api";
+import { toCelcius } from "../utils/helpers/converters";
 
 function WeatherState({ state } = this.props) {
-  if (state === "Cloudy") return <WiCloudy />;
-  if (state === "Rainy") return <WiRainMix />;
+  if (state === "Clouds") return <WiCloudy />;
+  if (state === "Rain") return <WiRainMix />;
   if (state === "Sunny") return <WiDaySunny />;
   if (state === "Shower") return <WiDayShowers />;
 }
 
 export default function WeatherDays({ latlngdata } = this.props) {
-  const [weatherdays, setWeatherdays] = useState([
-    {
-      id: 1,
-      date: "Tomorrow",
-      state: "Shower",
-      min_degree: "16C",
-      max_degree: "11C",
-    },
-    {
-      id: 2,
-      date: "Sun, 7 Jun",
-      state: "Shower",
-      min_degree: "16C",
-      max_degree: "11C",
-    },
-    {
-      id: 3,
-      date: "Mon, 8 Jun",
-      state: "Rainy",
-      min_degree: "16C",
-      max_degree: "11C",
-    },
-    {
-      id: 4,
-      date: "Tue, 9 Jun",
-      state: "Sunny",
-      min_degree: "16C",
-      max_degree: "11C",
-    },
-    {
-      id: 5,
-      date: "Wed, 10 Jun",
-      state: "Sunny",
-      min_degree: "16C",
-      max_degree: "11C",
-    },
-  ]);
-
   const [weatherForecast, setWeatherForecast] = useState(null);
   useEffect(async () => {
     function setApiData(lat, lng, theType) {
@@ -55,7 +18,7 @@ export default function WeatherDays({ latlngdata } = this.props) {
         // console.log(res);
         setWeatherForecast(
           // Get data with only 12:00:00 on dt_txt object
-          res.list.filter((x) => x.dt_txt.split(" ")[1] == "12:00:00")
+          res.list.filter((x) => x.dt_txt.split(" ")[1] == "15:00:00")
         );
       });
     }
@@ -74,12 +37,16 @@ export default function WeatherDays({ latlngdata } = this.props) {
       <div className="weather-days">
         {weatherForecast.map((item, index) => (
           <div className="weather-days__item" key={index}>
-            <h2>{item.dt_txt}</h2>
-            {/* <WeatherState state={item.main.temp} /> */}
-            {item.weather.main}
+            <h2>{item.dt_txt.split(" ")[0].split("-")[1]}</h2>
+            {
+              // TODO: Need to convert to proper format
+              // i.e Day text, Month Day-number (Sun, June 7)
+            }
+            <WeatherState state={item.weather[0].main} />
+            {/* {item.weather[0].main} */}
             {/* {item.state === "Rainy" ? "Rainy" : "Sunny"} */}
             <ul>
-              <li>16C</li>
+              <li>{toCelcius(item.main.temp)}°C</li>
               <li>11C</li>
             </ul>
           </div>

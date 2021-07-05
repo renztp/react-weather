@@ -3,14 +3,10 @@ import SidebarNavCont from "./SidebarNavCont";
 import SidebarNavState from "./SidebarNavState";
 import { getByLatLng } from "../controllers/openweather/api";
 import Sunny from "../assets/images/sunny.jpg";
+import { toCelcius } from "../utils/helpers/converters.js";
 
 export default function AppSidebar({ passlatlng } = this.props) {
   const [currWeather, setCurrWeather] = useState("");
-
-  const toCelcius = (temp) => {
-    return Math.floor(temp - 273.15);
-  };
-
   useEffect(() => {
     function setApiData(lat, lng, theType) {
       return getByLatLng(lat, lng, theType).then((res) => {

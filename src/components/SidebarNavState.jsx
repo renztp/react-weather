@@ -1,12 +1,9 @@
 import React from "react";
+import { toCelcius } from "../utils/helpers/converters";
 
 export default function SidebarNavState(
   { main, temp, description, icon } = this.props
 ) {
-  const toCelcius = (temp) => {
-    return Math.floor(temp - 273.15);
-  };
-
   const days = [
     "Sunday",
     "Monday",
