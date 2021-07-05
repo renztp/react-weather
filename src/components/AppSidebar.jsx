@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import SidebarNavCont from "./SidebarNavCont";
 import SidebarNavState from "./SidebarNavState";
 import { getByLatLng } from "../controllers/openweather/api";
+import Sunny from "../assets/images/sunny.jpg";
 
 export default function AppSidebar({ passlatlng } = this.props) {
   const [currWeather, setCurrWeather] = useState("");
@@ -22,11 +23,12 @@ export default function AppSidebar({ passlatlng } = this.props) {
     setApiData(passlatlng.lat, passlatlng.lng, "weather");
   }, []);
 
+  // If Data is loaded. Render this block of code
   if (currWeather) {
     const { main, description, icon } = currWeather.weather[0];
     const { temp } = currWeather.main;
     return (
-      <div className="AppSidebar">
+      <div className="AppSidebar" style={{ backgroundImage: `url(${Sunny})` }}>
         <SidebarNavCont />
         <SidebarNavState
           main={main}

@@ -49,31 +49,45 @@ export default function WeatherDays({ latlngdata } = this.props) {
   ]);
 
   const [weatherForecast, setWeatherForecast] = useState(null);
-  useEffect(() => {
+  useEffect(async () => {
     function setApiData(lat, lng, theType) {
       return getByLatLng(lat, lng, theType).then((res) => {
-        console.log(res)
-        setWeatherForecast(res);
+        // console.log(res);
+        setWeatherForecast(
+          // Get data with only 12:00:00 on dt_txt object
+          res.list.filter((x) => x.dt_txt.split(" ")[1] == "12:00:00")
+        );
       });
     }
 
-    setApiData(latlngdata.lat, latlngdata.lng, "forecast");
-    console.log(weatherForecast);
+    await setApiData(latlngdata.lat, latlngdata.lng, "forecast");
+    // await console.log(weatherForecast);
   }, [latlngdata]);
 
-  return (
-    <div className="weather-days">
-      {weatherdays.map((item, index) => (
-        <div className="weather-days__item" key="index">
-          <h2>{item.date}</h2>
-          <WeatherState state={item.state} />
-          {item.state === "Rainy" ? "Rainy" : "Sunny"}
-          <ul>
-            <li>{item.min_degree}</li>
-            <li>{item.max_degree}</li>
-          </ul>
-        </div>
-      ))}
-    </div>
-  );
+  useEffect(() => {
+    console.log(weatherForecast);
+  }, [weatherForecast]);
+
+  // If weatherForecast Data is received. Properly render forecast
+  if (weatherForecast) {
+    return (
+      <div className="weather-days">
+        {weatherForecast.map((item, index) => (
+          <div className="weather-days__item" key={index}>
+            <h2>{item.dt_txt}</h2>
+            {/* <WeatherState state={item.main.temp} /> */}
+            {item.weather.main}
+            {/* {item.state === "Rainy" ? "Rainy" : "Sunny"} */}
+            <ul>
+              <li>16C</li>
+              <li>11C</li>
+            </ul>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Else just render a loading message...
+  return <div className="weather-days">Loading...</div>;
 }
