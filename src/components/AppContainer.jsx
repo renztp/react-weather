@@ -1,11 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import WeatherDays from "../components/WeatherDays";
 import WeatherTracker from "../components/WeatherTracker";
 
 export default function AppContainer({ passlatlng } = this.props) {
-  // useEffect(() => {
-  // }, []);
-
   return (
     <div className="app-container">
       <div className="app-container__container">

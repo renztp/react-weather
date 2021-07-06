@@ -11,6 +11,7 @@ import {
   WiDayCloudy,
   WiCloud,
   WiNightAltPartlyCloudy,
+  WiRaindrop,
 } from "react-icons/wi";
 import { getByLatLng } from "../controllers/openweather/api";
 import { toCelcius } from "../utils/helpers/converters";
@@ -24,29 +25,29 @@ function WeatherState({ state } = this.props) {
   if (state === "13d") return <WiSnowflakeCold />;
   if (state === "50d") return <WiDust />;
   if (state === "02d") return <WiDayCloudy />;
-  if (state === "02n") return <WiNightAltPartlyCloudy />;
   if (state === "03d") return <WiCloudy />;
-  if (state === "03n") return <WiNightAltPartlyCloudy />;
   if (state === "04d") return <WiCloud />;
-  if (state === "04n") return <WiNightAltPartlyCloudy />;
+  if (state === "04n" || state === "03n" || state === "02n")
+    return <WiNightAltPartlyCloudy />;
+  if (state === "10n") return <WiRaindrop />;
 }
 
 export default function WeatherDays({ latlngdata } = this.props) {
   const [weatherForecast, setWeatherForecast] = useState(null);
-  useEffect(async () => {
-    function setApiData(lat, lng, theType) {
+  useEffect(() => {
+    async function setApiData(lat, lng, theType) {
       return getByLatLng(lat, lng, theType).then((res) => {
         // console.log(res);
         setWeatherForecast(
           // Get data with only 12:00:00 on dt_txt object
-          res.list.filter((x) => x.dt_txt.split(" ")[1] == "15:00:00")
+          res.list.filter((x) => x.dt_txt.split(" ")[1] === "15:00:00")
         );
       });
     }
 
-    await setApiData(latlngdata.lat, latlngdata.lng, "forecast");
+    setApiData(latlngdata.lat, latlngdata.lng, "forecast");
     // await console.log(weatherForecast);
-  }, [latlngdata]);
+  }, [latlngdata.lat, latlngdata.lng]);
 
   useEffect(() => {
     console.log(weatherForecast);

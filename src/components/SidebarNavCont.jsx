@@ -1,6 +1,6 @@
 import React from "react";
 import { BiCurrentLocation } from "react-icons/bi";
-import { BsSearch, BsChevronLeft } from "react-icons/bs";
+import { BsSearch } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 
 export default function SidebarNavCont() {

@@ -1,33 +1,25 @@
 import React, { useState } from "react";
-import { FiSearch } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import PlacesAutocomplete, {
   geocodeByAddress,
-  geocodeByPlaceId,
   getLatLng,
 } from "react-places-autocomplete";
 import { useHistory } from "react-router-dom";
 
 export default function AppSearch(props) {
   const history = useHistory();
-  // const [searchInput, setSearchInput] = useState("");
-
-  // const captureSearch = (e) => {
-  //   setSearchInput(e);
-  // };
 
   const [address, setAddress] = useState("");
   const [locInputState, setlocInputState] = useState(false);
-  const [coordinates, setCoordinates] = useState({
-    lat: null,
-    lng: null,
-  });
+  // const [coordinates, setCoordinates] = useState({
+  //   lat: null,
+  //   lng: null,
+  // });
 
   const handleSelect = async (value) => {
     const result = await geocodeByAddress(value);
     const latlng = await getLatLng(result[0]);
     await setAddress(value);
-    await setCoordinates(latlng);
     await props.passfunction(latlng);
     history.push("/");
   };

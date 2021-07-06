@@ -1,8 +1,6 @@
 import axios from "axios";
 
 const api_key = process.env.REACT_APP_OPENWEATHER_KEY;
-var date = new Date();
-const targetHour = date.getDate() + ":" + date.getMonth;
 
 /* 
 ! Need to create current hh:mm:ss hour to selected UTC TIME FORMAT
