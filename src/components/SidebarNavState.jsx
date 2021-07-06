@@ -1,5 +1,6 @@
 import React from "react";
 import { toCelcius } from "../utils/helpers/converters";
+import WeatherState from "./WeatherState";
 
 export default function SidebarNavState(
   { main, temp, description, icon } = this.props
@@ -19,7 +20,8 @@ export default function SidebarNavState(
   return (
     <div className="AppSidebar__weather-state">
       <div className="state__condition">
-        <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
+        {/* <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" /> */}
+        <WeatherState style={{ fill: "#fff" }} state={icon} />
         <div className="state__condition__temp-and-day">
           <p>Today - {days[day]}</p>
           <span>{toCelcius(temp)}°C</span>

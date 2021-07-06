@@ -34,7 +34,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App" style={{ background: "#E9F5F9" }}>
       <Router>
         <div className="sidebar-container">
           <Switch>
@@ -46,7 +46,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-        <AppContainer passlatlng={latlng} />
+        <AppContainer passlatlng={latlng} weatherData={currWeather} />
       </Router>
     </div>
   );
