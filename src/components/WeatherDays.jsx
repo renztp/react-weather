@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { formatDay } from "../utils/helpers/formatters";
 import { getByLatLng } from "../controllers/openweather/api";
 import { toCelcius } from "../utils/helpers/converters";
 import WeatherState from "./WeatherState";
@@ -29,26 +29,34 @@ export default function WeatherDays({ latlngdata } = this.props) {
   if (weatherForecast) {
     return (
       <div className="weather-days">
-        {weatherForecast.map((item, index) => (
-          <div className="weather-days__item" key={index}>
-            <h2>{item.dt_txt.split(" ")[0].split("-")[1]}</h2>
-            {
-              // TODO: Need to convert to proper format
-              // i.e Day text, Month Day-number (Sun, June 7)
-            }
-            <WeatherState state={item.weather[0].icon} />
-            {/* {item.weather[0].icon} */}
-            {/* {item.state === "Rainy" ? "Rainy" : "Sunny"} */}
-            <ul>
-              <li>{toCelcius(item.main.temp)}°C</li>
-              <li>11C</li>
-            </ul>
-          </div>
-        ))}
+        <h1 style={{ marginBottom: "15px" }}>Forecast - 5 day / 3 hours</h1>
+        <div className="weather-days__container">
+          {weatherForecast.map((item, index) => (
+            <div className="weather-days__item" key={index}>
+              <h2>{formatDay(item.dt_txt.split(" ")[0])}</h2>
+              {
+                // TODO: Need to convert to proper format
+                // i.e Day text, Month Day-number (Sun, June 7)
+              }
+              <WeatherState state={item.weather[0].icon} />
+              {/* {item.weather[0].icon} */}
+              {/* {item.state === "Rainy" ? "Rainy" : "Sunny"} */}
+              <ul>
+                <li>{toCelcius(item.main.temp)}°C</li>
+                <li>11C</li>
+              </ul>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
 
   // Else just render a loading message...
-  return <div className="weather-days">Loading...</div>;
+  return (
+    <div className="weather-days">
+      <h1 style={{ marginBottom: "15px" }}>Forecast - 5 day / 3 hours</h1>
+      <div className="weather-days__container">Loading...</div>
+    </div>
+  );
 }

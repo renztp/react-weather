@@ -2,17 +2,19 @@
   margin: 4em 0;
   display: flex;
 
-  &__container {
+  &__inner {
     width: 80%;
     margin: 0 auto;
     align-self: center;
   }
 
   .weather-days {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-column-gap: 25px;
-    margin-bottom: 100px;
+    &__container {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-column-gap: 25px;
+      margin-bottom: 100px;
+    }
 
     &__item {
       background: #fff;

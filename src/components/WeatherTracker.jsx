@@ -58,5 +58,12 @@ export default function WeatherTracker({ weatherData } = this.props) {
     );
   }
 
-  return <div>Loading</div>;
+  return (
+    <div className="weather-tracker">
+      <h1>Weather Tracker</h1>
+      <div>
+        <p>Loading...</p>
+      </div>
+    </div>
+  );
 }
