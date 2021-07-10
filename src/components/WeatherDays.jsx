@@ -4,6 +4,9 @@ import { getByLatLng } from "../controllers/openweather/api";
 import { toCelcius } from "../utils/helpers/converters";
 import WeatherState from "./WeatherState";
 
+// React Spring
+import { useSpring, animated } from "react-spring";
+
 export default function WeatherDays({ latlngdata } = this.props) {
   const [weatherForecast, setWeatherForecast] = useState(null);
   useEffect(() => {
@@ -25,10 +28,23 @@ export default function WeatherDays({ latlngdata } = this.props) {
     console.log(weatherForecast);
   }, [weatherForecast]);
 
+  const appearTop = useSpring({
+    from: {
+      position: "relative",
+      top: "-150px",
+      opacity: 0,
+    },
+    to: {
+      position: "relative",
+      top: "0",
+      opacity: 1,
+    },
+  });
+
   // If weatherForecast Data is received. Properly render forecast
   if (weatherForecast) {
     return (
-      <div className="weather-days">
+      <animated.div className="weather-days" style={appearTop}>
         <h1 style={{ marginBottom: "15px" }}>Forecast - 5 day / 3 hours</h1>
         <div className="weather-days__container">
           {weatherForecast.map((item, index) => (
@@ -48,15 +64,15 @@ export default function WeatherDays({ latlngdata } = this.props) {
             </div>
           ))}
         </div>
-      </div>
+      </animated.div>
     );
   }
 
   // Else just render a loading message...
   return (
-    <div className="weather-days">
+    <animated.div className="weather-days" style={appearTop}>
       <h1 style={{ marginBottom: "15px" }}>Forecast - 5 day / 3 hours</h1>
       <div className="weather-days__container">Loading...</div>
-    </div>
+    </animated.div>
   );
 }

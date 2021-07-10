@@ -1,24 +1,22 @@
 import React from "react";
 import { BiCurrentLocation } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function SidebarNavCont() {
-  const history = useHistory();
-
   return (
     <div className="AppSidebar__nav-controls">
       <div className="app-search__form">
         <div className="form-container">
           <div className="loc-input-wrapper">
-            <button
-              onClick={() => history.push("/search")}
+            <Link
+              to="/search"
               className="search-btn"
+              style={{ textDecoration: "none" }}
             >
-              {/* <BsChevronLeft className="btn-left" /> */}
               <BsSearch style={{ marginRight: "8px" }} />
               Search Location
-            </button>
+            </Link>
           </div>
         </div>
       </div>

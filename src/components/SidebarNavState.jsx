@@ -1,5 +1,6 @@
 import React from "react";
 import { toCelcius } from "../utils/helpers/converters";
+import { useSpring, animated } from "react-spring";
 import WeatherState from "./WeatherState";
 
 export default function SidebarNavState(
@@ -17,8 +18,19 @@ export default function SidebarNavState(
   const theDate = new Date();
   const day = theDate.getDay();
 
+  const appearBounceTop = useSpring({
+    from: {
+      bottom: "13%",
+      opacity: 0,
+    },
+    to: {
+      bottom: "10%",
+      opacity: 1,
+    },
+  });
+
   return (
-    <div className="AppSidebar__weather-state">
+    <animated.div style={appearBounceTop} className="AppSidebar__weather-state">
       <div className="state__condition">
         {/* <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" /> */}
         <WeatherState style={{ fill: "#fff" }} state={icon} />
@@ -31,6 +43,6 @@ export default function SidebarNavState(
         <h1>{main}</h1>
         <p>{description}</p>
       </div>
-    </div>
+    </animated.div>
   );
 }

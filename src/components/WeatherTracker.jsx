@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSpring, animated } from "react-spring";
 
 export default function WeatherTracker({ weatherData } = this.props) {
   const [windSpeed, setWindSpeed] = useState(null);
@@ -21,9 +22,22 @@ export default function WeatherTracker({ weatherData } = this.props) {
     }
   }, [weatherData]);
 
+  const appearTop = useSpring({
+    from: {
+      position: "relative",
+      top: "-150px",
+      opacity: 0,
+    },
+    to: {
+      position: "relative",
+      top: "0",
+      opacity: 1,
+    },
+  });
+
   if (weatherData) {
     return (
-      <div className="weather-tracker">
+      <animated.div style={appearTop} className="weather-tracker">
         <h1>Weather Tracker</h1>
         <div className="weather-tracker__container">
           <div className="status-wind weather-tracker__inner-item">
@@ -54,16 +68,16 @@ export default function WeatherTracker({ weatherData } = this.props) {
             </p>
           </div>
         </div>
-      </div>
+      </animated.div>
     );
   }
 
   return (
-    <div className="weather-tracker">
+    <animated.div style={appearTop} className="weather-tracker">
       <h1>Weather Tracker</h1>
       <div>
         <p>Loading...</p>
       </div>
-    </div>
+    </animated.div>
   );
 }
