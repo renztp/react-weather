@@ -42,19 +42,19 @@ export default function WeatherTracker({ weatherData } = this.props) {
         <div className="weather-tracker__container">
           <div className="status-wind weather-tracker__inner-item">
             <p className="data-title">Wind Status</p>
-            <p class="data-text">
+            <p className="data-text">
               <strong>{windSpeed}</strong>&nbsp;mph
             </p>
           </div>
           <div className="status-humidity weather-tracker__inner-item">
-            <p class="data-title">Humidity</p>
-            <p class="data-text">
+            <p className="data-title">Humidity</p>
+            <p className="data-text">
               <strong>{humidity}</strong>&nbsp;%
             </p>
           </div>
           <div className="status-visibility weather-tracker__inner-item">
-            <p class="data-title">Coordinates</p>
-            <p class="data-text">
+            <p className="data-title">Coordinates</p>
+            <p className="data-text">
               lat&nbsp;
               <strong>{lat}</strong>
               <br />
@@ -62,8 +62,8 @@ export default function WeatherTracker({ weatherData } = this.props) {
             </p>
           </div>
           <div className="status-pressure weather-tracker__inner-item">
-            <p class="data-title">Air Pressure</p>
-            <p class="data-text">
+            <p className="data-title">Air Pressure</p>
+            <p className="data-text">
               <strong>{pressure}</strong>&nbsp;mb
             </p>
           </div>

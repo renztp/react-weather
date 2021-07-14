@@ -189,12 +189,13 @@
     border-radius: 8px;
 
     &.search {
-      border: 2px solid #ddd;
+      // border: 2px solid #ddd;
+      border: 1px solid #ddd;
       box-shadow: unset;
     }
 
     &.is--focused {
-      border: 2px solid rgb(199, 199, 147);
+      border: 1px solid rgb(199, 199, 147);
     }
 
     &.search svg {

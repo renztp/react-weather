@@ -39,7 +39,10 @@ function App() {
         <div className="sidebar-container">
           <Switch>
             <Route exact path="/">
-              <AppSidebar weatherData={currWeather} />
+              <AppSidebar
+                passfunction={handleSetLatlng}
+                weatherData={currWeather}
+              />
             </Route>
             <Route exact path="/search">
               <AppSearch passfunction={handleSetLatlng} />
