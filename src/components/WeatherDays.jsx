@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { formatDay } from "../utils/helpers/formatters";
 import { getByLatLng } from "../controllers/openweather/api";
-import { toCelcius } from "../utils/helpers/converters";
+import { toCelcius, toFahrenheit } from "../utils/helpers/converters";
 import WeatherState from "./WeatherState";
 
 // React Spring
@@ -50,16 +50,10 @@ export default function WeatherDays({ latlngdata } = this.props) {
           {weatherForecast.map((item, index) => (
             <div className="weather-days__item" key={index}>
               <h2>{formatDay(item.dt_txt.split(" ")[0])}</h2>
-              {
-                // TODO: Need to convert to proper format
-                // i.e Day text, Month Day-number (Sun, June 7)
-              }
               <WeatherState state={item.weather[0].icon} />
-              {/* {item.weather[0].icon} */}
-              {/* {item.state === "Rainy" ? "Rainy" : "Sunny"} */}
               <ul>
                 <li>{toCelcius(item.main.temp)}°C</li>
-                <li>11C</li>
+                <li>{toFahrenheit(item.main.temp)}°F</li>
               </ul>
             </div>
           ))}
