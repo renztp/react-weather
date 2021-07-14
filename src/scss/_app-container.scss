@@ -31,16 +31,40 @@
     }
 
     &__item ul {
-      padding: 0;
+      padding: 10px 15px 0 15px;
       margin: 0;
       list-style: none;
       display: flex;
       justify-content: space-around;
+
+      font-size: 18px;
+      // border-top: 1px solid #ddd;
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 1px;
+        background: #ddd;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        height: 125%;
+        width: 1.5px;
+        background: #ddd;
+      }
     }
 
     &__item svg {
       display: block;
-      width: 4em;
+      width: 5em;
       height: auto;
       padding: 15px 0;
       margin: 0 auto;
