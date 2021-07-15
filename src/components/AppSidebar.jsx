@@ -4,7 +4,9 @@ import SidebarNavState from "./SidebarNavState";
 import Sunny from "../assets/images/sunny.jpg";
 import { useSpring, animated } from "react-spring";
 
-export default function AppSidebar({ weatherData, passfunction } = this.props) {
+export default function AppSidebar(
+  { weatherData, passfunction, currLocation } = this.props
+) {
   const fade = useSpring({
     from: {
       opacity: 0,
@@ -27,6 +29,7 @@ export default function AppSidebar({ weatherData, passfunction } = this.props) {
             description={description}
             temp={temp}
             icon={icon}
+            location={currLocation}
           />
         </animated.div>
       </animated.div>

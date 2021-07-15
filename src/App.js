@@ -8,10 +8,13 @@ import Webfont from "webfontloader";
 
 function App() {
   const [latlng, setLatlng] = useState({ lat: 51.5078788, lng: -0.0877321 });
+  const [currCountry, setCurrCountry] = useState("Finding location");
   const [currWeather, setCurrWeather] = useState(null);
 
   const handleSetLatlng = (theData) => {
-    setLatlng(theData);
+    console.log(theData.latlng);
+    setLatlng(theData.latlng);
+    setCurrCountry(theData.theCountry);
   };
 
   // Get Api when latlng state changes
@@ -42,6 +45,7 @@ function App() {
               <AppSidebar
                 passfunction={handleSetLatlng}
                 weatherData={currWeather}
+                currLocation={currCountry}
               />
             </Route>
             <Route exact path="/search">

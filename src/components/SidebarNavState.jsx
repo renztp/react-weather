@@ -1,10 +1,11 @@
 import React from "react";
 import { toCelcius } from "../utils/helpers/converters";
 import { useSpring, animated } from "react-spring";
+import { MdLocationOn } from "react-icons/md";
 import WeatherState from "./WeatherState";
 
 export default function SidebarNavState(
-  { main, temp, description, icon } = this.props
+  { main, temp, description, icon, location } = this.props
 ) {
   const days = [
     "Sunday",
@@ -41,7 +42,10 @@ export default function SidebarNavState(
       </div>
       <div className="state__info">
         <h1>{main}</h1>
-        <p>{description}</p>
+        <p>
+          <MdLocationOn />
+          {location}
+        </p>
       </div>
     </animated.div>
   );

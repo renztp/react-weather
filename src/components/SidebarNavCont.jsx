@@ -8,7 +8,9 @@ export default function SidebarNavCont({ passfunction } = this.props) {
   const getCurrLocation = async () => {
     navigator.geolocation.getCurrentPosition(function (pos) {
       // getLatlng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-      passfunction({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+      passfunction({
+        latlng: { lat: pos.coords.latitude, lng: pos.coords.longitude },
+      });
     });
   };
 

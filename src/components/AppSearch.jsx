@@ -16,8 +16,9 @@ export default function AppSearch(props) {
   const handleSelect = async (value) => {
     const result = await geocodeByAddress(value);
     const latlng = await getLatLng(result[0]);
+    console.log(value);
     await setAddress(value);
-    await props.passfunction(latlng);
+    await props.passfunction({ latlng: latlng, theCountry: value });
     history.push("/");
   };
 
