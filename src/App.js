@@ -11,10 +11,10 @@ function App() {
   const [currCountry, setCurrCountry] = useState("Finding location");
   const [currWeather, setCurrWeather] = useState(null);
 
-  const handleSetLatlng = (theData) => {
-    console.log(theData.latlng);
-    setLatlng(theData.latlng);
-    setCurrCountry(theData.theCountry);
+  const handleSetLatlng = async (theData) => {
+    console.log(theData);
+    await setLatlng(theData.latlng);
+    await setCurrCountry(theData.theCountry);
   };
 
   // Get Api when latlng state changes

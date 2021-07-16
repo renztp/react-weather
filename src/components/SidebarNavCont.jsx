@@ -9,26 +9,40 @@ export default function SidebarNavCont({ passfunction } = this.props) {
   const getCurrLocation = () => {
     navigator.geolocation.getCurrentPosition(function (pos) {
       getLatlng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-      // passfunction({
-      //   latlng: { lat: pos.coords.latitude, lng: pos.coords.longitude },
-      // });
     });
+    console.log(latlng);
   };
 
-  const getCurrCountry = (pos) => {
-    // console.log(pos);
-    return fetch(`https://geocode.xyz/${pos.lat},${pos.lng}?json=1`)
-      .then((res) => res.json())
-      .then(function (response) {
-        // return response;
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
+  const getCurrCountry = async (pos) => {
+    return await fetch(`https://geocode.xyz/${pos.lat},${pos.lng}?json=1`);
   };
 
   const processCoordReq = () => {
     // getCurrCountry();
-    getCurrLocation();
+
+    setTimeout(async () => {
+      try {
+        getCurrLocation();
+      } catch (e) {
+        console.log(e);
+      }
+
+      let locData = {};
+      try {
+        locData = await (await getCurrCountry(latlng)).json();
+      } catch (e) {
+        console.log(e);
+      }
+      // console.log({
+      //   latlng: latlng,
+      //   theCountry: `${locData.country}, ${locData.prov}`,
+      // });
+      passfunction({
+        latlng: latlng,
+        theCountry: `${locData.country}, ${locData.prov}`,
+      });
+    }, 1000);
+
     // let country = getCurrCountry(latlng);
     // console.log(country);
     // console.log({ coords: latlng, country: country });
@@ -51,7 +65,7 @@ export default function SidebarNavCont({ passfunction } = this.props) {
         </div>
       </div>
       <button className="loc-btn nav-btn">
-        <BiCurrentLocation size="1.5em" onClick={() => getCurrLocation()} />
+        <BiCurrentLocation size="1.5em" onClick={() => processCoordReq()} />
       </button>
     </div>
   );
