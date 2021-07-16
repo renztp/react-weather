@@ -2,16 +2,36 @@ import React, { useState, useEffect } from "react";
 import { BiCurrentLocation } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 export default function SidebarNavCont({ passfunction } = this.props) {
   const [latlng, getLatlng] = useState(null);
-  const getCurrLocation = async () => {
+  const getCurrLocation = () => {
     navigator.geolocation.getCurrentPosition(function (pos) {
-      // getLatlng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-      passfunction({
-        latlng: { lat: pos.coords.latitude, lng: pos.coords.longitude },
-      });
+      getLatlng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+      // passfunction({
+      //   latlng: { lat: pos.coords.latitude, lng: pos.coords.longitude },
+      // });
     });
+  };
+
+  const getCurrCountry = (pos) => {
+    // console.log(pos);
+    return fetch(`https://geocode.xyz/${pos.lat},${pos.lng}?json=1`)
+      .then((res) => res.json())
+      .then(function (response) {
+        // return response;
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const processCoordReq = () => {
+    // getCurrCountry();
+    getCurrLocation();
+    // let country = getCurrCountry(latlng);
+    // console.log(country);
+    // console.log({ coords: latlng, country: country });
   };
 
   return (
