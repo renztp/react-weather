@@ -5,7 +5,7 @@ import Sunny from "../assets/images/sunny.jpg";
 import { useSpring, animated } from "react-spring";
 
 export default function AppSidebar(
-  { weatherData, passfunction, currLocation } = this.props
+  { weatherData, passfunction, currLocation, handleCurrCountry } = this.props
 ) {
   const fade = useSpring({
     from: {
@@ -23,7 +23,10 @@ export default function AppSidebar(
     return (
       <animated.div className="sidebar-contianer">
         <animated.div className="AppSidebar" style={fade}>
-          <SidebarNavCont passfunction={passfunction} />
+          <SidebarNavCont
+            passfunction={passfunction}
+            handleCurrCountry={handleCurrCountry}
+          />
           <SidebarNavState
             main={main}
             description={description}

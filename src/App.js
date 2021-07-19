@@ -11,6 +11,10 @@ function App() {
   const [currCountry, setCurrCountry] = useState("Finding location");
   const [currWeather, setCurrWeather] = useState(null);
 
+  const handleCurrCountry = async (country) => {
+    await setCurrCountry(country);
+  };
+
   const handleSetLatlng = async (theData) => {
     console.log(theData);
     await setLatlng(theData.latlng);
@@ -46,6 +50,7 @@ function App() {
                 passfunction={handleSetLatlng}
                 weatherData={currWeather}
                 currLocation={currCountry}
+                handleCurrCountry={handleCurrCountry}
               />
             </Route>
             <Route exact path="/search">

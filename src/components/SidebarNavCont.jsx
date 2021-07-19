@@ -6,47 +6,32 @@ import axios from "axios";
 
 export default function SidebarNavCont({ passfunction } = this.props) {
   const [latlng, getLatlng] = useState(null);
-  const getCurrLocation = () => {
+  const [country, setCountry] = useState(null);
+
+  /* Ask current location */
+
+  function findGeolocation() {
     navigator.geolocation.getCurrentPosition(function (pos) {
       getLatlng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+      console.log("geolocation set");
     });
-    console.log(latlng);
-  };
+  }
 
-  const getCurrCountry = async (pos) => {
-    return await fetch(`https://geocode.xyz/${pos.lat},${pos.lng}?json=1`);
-  };
+  useEffect(() => {
+    findGeolocation();
+  }, []);
 
-  const processCoordReq = () => {
-    // getCurrCountry();
-
-    setTimeout(async () => {
-      try {
-        getCurrLocation();
-      } catch (e) {
-        console.log(e);
-      }
-
-      let locData = {};
-      try {
-        locData = await (await getCurrCountry(latlng)).json();
-      } catch (e) {
-        console.log(e);
-      }
-      // console.log({
-      //   latlng: latlng,
-      //   theCountry: `${locData.country}, ${locData.prov}`,
-      // });
-      passfunction({
-        latlng: latlng,
-        theCountry: `${locData.country}, ${locData.prov}`,
-      });
-    }, 1000);
-
-    // let country = getCurrCountry(latlng);
-    // console.log(country);
-    // console.log({ coords: latlng, country: country });
-  };
+  function processProperData() {
+    fetch(`https://geocode.xyz/${latlng.lat},${latlng.lng}?json=1`)
+      .then((res) => res.json())
+      .then((response) => {
+        passfunction({
+          latlng: latlng,
+          theCountry: `${response.country}, ${response.prov}`,
+        });
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className="AppSidebar__nav-controls">
@@ -65,7 +50,7 @@ export default function SidebarNavCont({ passfunction } = this.props) {
         </div>
       </div>
       <button className="loc-btn nav-btn">
-        <BiCurrentLocation size="1.5em" onClick={() => processCoordReq()} />
+        <BiCurrentLocation size="1.5em" onClick={() => processProperData()} />
       </button>
     </div>
   );
