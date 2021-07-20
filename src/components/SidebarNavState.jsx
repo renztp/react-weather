@@ -42,10 +42,12 @@ export default function SidebarNavState(
       </div>
       <div className="state__info">
         <h1>{main}</h1>
-        <p>
-          <MdLocationOn />
-          {location}
-        </p>
+        {location && (
+          <p>
+            <MdLocationOn />
+            {location}
+          </p>
+        )}
       </div>
     </animated.div>
   );

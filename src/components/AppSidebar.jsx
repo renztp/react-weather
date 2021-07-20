@@ -26,6 +26,7 @@ export default function AppSidebar(
           <SidebarNavCont
             passfunction={passfunction}
             handleCurrCountry={handleCurrCountry}
+            weatherData={weatherData}
           />
           <SidebarNavState
             main={main}

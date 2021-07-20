@@ -10,7 +10,7 @@ export default function SidebarNavCont({ passfunction } = this.props) {
 
   /* Ask current location */
 
-  function findGeolocation() {
+  function findGeolocation(cb) {
     navigator.geolocation.getCurrentPosition(function (pos) {
       getLatlng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
       console.log("geolocation set");
@@ -22,15 +22,17 @@ export default function SidebarNavCont({ passfunction } = this.props) {
   }, []);
 
   function processProperData() {
-    fetch(`https://geocode.xyz/${latlng.lat},${latlng.lng}?json=1`)
-      .then((res) => res.json())
-      .then((response) => {
-        passfunction({
-          latlng: latlng,
-          theCountry: `${response.country}, ${response.prov}`,
-        });
-      })
-      .catch((err) => console.log(err));
+    setTimeout(() => {
+      fetch(`https://geocode.xyz/${latlng.lat},${latlng.lng}?json=1`)
+        .then((res) => res.json())
+        .then((response) => {
+          passfunction({
+            latlng: latlng,
+            theCountry: `${response.country}, ${response.prov}`,
+          });
+        })
+        .catch((err) => console.log(err));
+    }, 2000);
   }
 
   return (

@@ -8,7 +8,7 @@ import Webfont from "webfontloader";
 
 function App() {
   const [latlng, setLatlng] = useState({ lat: 51.5078788, lng: -0.0877321 });
-  const [currCountry, setCurrCountry] = useState("Finding location");
+  const [currCountry, setCurrCountry] = useState(null);
   const [currWeather, setCurrWeather] = useState(null);
 
   const handleCurrCountry = async (country) => {
@@ -16,8 +16,8 @@ function App() {
   };
 
   const handleSetLatlng = async (theData) => {
-    console.log(theData);
-    await setLatlng(theData.latlng);
+    console.log(theData.latlng.lat);
+    await setLatlng({ lat: theData.latlng.lat, lng: theData.latlng.lng });
     await setCurrCountry(theData.theCountry);
   };
 
@@ -29,7 +29,9 @@ function App() {
         setCurrWeather(res);
       });
     }
-    setApiData(latlng.lat, latlng.lng, "weather");
+    if (latlng) {
+      setApiData(latlng.lat, latlng.lng, "weather");
+    }
   }, [latlng]);
 
   useEffect(() => {
@@ -38,6 +40,16 @@ function App() {
         families: ["Inter"],
       },
     });
+
+    // Ask for Latlong Geolocation
+    if (!navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        setLatlng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+      });
+    } else {
+      // Set Default `London` Location
+      setLatlng({ lat: 51.5078788, lng: -0.0877321 });
+    }
   }, []);
 
   return (
@@ -58,7 +70,11 @@ function App() {
             </Route>
           </Switch>
         </div>
-        <AppContainer passlatlng={latlng} weatherData={currWeather} />
+        <AppContainer
+          showData={latlng}
+          passlatlng={latlng}
+          weatherData={currWeather}
+        />
       </Router>
     </div>
   );
