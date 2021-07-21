@@ -19,7 +19,7 @@ export default function AppSearch(props) {
     console.log(value);
     await setAddress(value);
     await props.passfunction({ latlng: latlng, theCountry: value });
-    history.push("/");
+    history.push("/react-weather");
   };
 
   const clearInput = () => {
