@@ -57,7 +57,7 @@ function App() {
       <Router>
         <div className="sidebar-container">
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/react-weather/">
               <AppSidebar
                 passfunction={handleSetLatlng}
                 weatherData={currWeather}
@@ -65,7 +65,7 @@ function App() {
                 handleCurrCountry={handleCurrCountry}
               />
             </Route>
-            <Route exact path="/search">
+            <Route exact path="/react-weather/search">
               <AppSearch passfunction={handleSetLatlng} />
             </Route>
           </Switch>
