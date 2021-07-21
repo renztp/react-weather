@@ -8,13 +8,6 @@ export default function AppContainer(
   return (
     <div className="app-container">
       <div className="app-container__inner">
-        {passlatlng && (
-          <ul>
-            <li>{showData.lat}</li>
-            <li>{showData.lng}</li>
-          </ul>
-        )}
-
         {passlatlng && <WeatherDays latlngdata={passlatlng} />}
 
         <WeatherTracker weatherData={weatherData} />

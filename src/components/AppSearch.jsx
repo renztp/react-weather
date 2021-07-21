@@ -77,7 +77,6 @@ export default function AppSearch(props) {
                       onClick={clearInput}
                     />
                   </div>
-                  {/* <div>{loading ? <div>Loading...</div> : null}</div> */}
                   <ul
                     className={
                       address.length > 0
