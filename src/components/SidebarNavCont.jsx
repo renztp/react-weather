@@ -41,7 +41,7 @@ export default function SidebarNavCont({ passfunction } = this.props) {
         <div className="form-container">
           <div className="loc-input-wrapper">
             <Link
-              to="/search"
+              to="/react-weather/search"
               className="search-btn"
               style={{ textDecoration: "none" }}
             >
