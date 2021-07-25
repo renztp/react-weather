@@ -17,22 +17,38 @@ export default function SidebarNavCont({ passfunction } = this.props) {
     });
   }
 
-  useEffect(() => {
-    findGeolocation();
-  }, []);
+  // useEffect(() => {
+  //   findGeolocation();
+  // }, []);
 
   function processProperData() {
-    setTimeout(() => {
-      fetch(`https://geocode.xyz/${latlng.lat},${latlng.lng}?json=1`)
-        .then((res) => res.json())
-        .then((response) => {
+    // findGeolocation(
+    //   setTimeout(() => {
+    //     fetch(`https://geocode.xyz/${latlng.lat},${latlng.lng}?json=1`)
+    //       .then((res) => res.json())
+    //       .then((response) => {
+    //         passfunction({
+    //           latlng: latlng,
+    //           theCountry: `${response.country}, ${response.prov}`,
+    //         });
+    //       })
+    //       .catch((err) => console.log(err));
+    //   }, 2000)
+    // );
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      // getLatlng({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+      let data = axios(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${pos.coords.latitude},${pos.coords.longitude}&key=${process.env.REACT_APP_GMAP_KEY}`
+      )
+        .then((res) => res.data.results)
+        .then((response) =>
           passfunction({
-            latlng: latlng,
-            theCountry: `${response.country}, ${response.prov}`,
-          });
-        })
-        .catch((err) => console.log(err));
-    }, 2000);
+            latlng: { lat: pos.coords.latitude, lng: pos.coords.longitude },
+            theCountry: response[0].formatted_address,
+          })
+        );
+    });
   }
 
   return (
